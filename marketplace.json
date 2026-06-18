@@ -1,0 +1,264 @@
+{
+  "name": "shipready",
+  "version": "1.0.0",
+  "description": "Generate production-grade, deploy-ready apps from a single sentence. No prototypes. No placeholders. No TODOs. Complete codebases only — security, database, error handling, API design, environment, performance, frontend, and DevOps baked in from line one.",
+  "author": "Anubhav",
+  "tags": [
+    "codegen",
+    "production",
+    "fullstack",
+    "devops",
+    "nextjs",
+    "prisma",
+    "postgresql",
+    "typescript",
+    "docker",
+    "security",
+    "authentication",
+    "api",
+    "tailwindcss",
+    "vercel"
+  ],
+  "category": "Development",
+  "icon": "🚢",
+  "repository": "https://github.com/yourusername/shipready",
+  "homepage": "https://github.com/yourusername/shipready",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "/shipready",
+      "description": "Generate a production-grade app from a description",
+      "usage": "/shipready [your app description in plain English]",
+      "examples": [
+        "/shipready restaurant booking app with admin panel and email confirmations",
+        "/shipready SaaS waitlist with email capture and referral tracking",
+        "/shipready personal finance tracker with budget alerts and charts",
+        "/shipready multi-tenant project management tool like Trello",
+        "/shipready e-commerce store with Stripe checkout and order tracking"
+      ]
+    },
+    {
+      "name": "/shipready help",
+      "description": "Show usage instructions and examples",
+      "usage": "/shipready help"
+    }
+  ],
+  "capabilities": [
+    "Generates complete Next.js 14 + Prisma + PostgreSQL TypeScript applications",
+    "Bakes in all 8 production dimensions from line one: Security, Database, Error Handling, API Design, Environment, Performance, Frontend, DevOps",
+    "Creates Dockerfile + docker-compose.yml with health checks and multi-stage builds",
+    "Generates comprehensive README with exact copy-paste setup commands",
+    "Produces SHIPREADY.md audit report with detailed Ship Score (X/100)",
+    "Sets up authentication with NextAuth.js (email/password + OAuth)",
+    "Configures structured logging with Pino and environment validation with Zod",
+    "Implements rate limiting with Upstash Redis",
+    "Creates full CRUD API routes with consistent error responses",
+    "Generates complete frontend pages with loading, error, and empty states",
+    "No prototypes, no placeholders, no TODOs - only production-ready code",
+    "Includes seed data with admin and regular user accounts"
+  ],
+  "requirements": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0",
+    "git": "optional",
+    "docker": "optional (recommended for local development)",
+    "postgresql": "optional (Docker recommended)",
+    "redis": "optional (required for rate limiting)"
+  },
+  "outputs": {
+    "project_structure": "Complete Next.js 14 App Router project with TypeScript",
+    "database": "Prisma schema with migrations, seed data, and singleton client",
+    "api": "RESTful API with versioning (v1), pagination, and consistent response shapes",
+    "auth": "NextAuth.js with credentials provider and JWT sessions",
+    "frontend": "Tailwind CSS with dark mode, shadcn/ui components, and form validation",
+    "docker": "Optimized multi-stage Dockerfile and docker-compose.yml",
+    "docs": "README.md with setup guide and SHIPREADY.md audit report",
+    "validation": "Zod schemas for all inputs with type safety",
+    "logging": "Pino structured logging with redaction",
+    "middleware": "Authentication, security headers, and CORS configuration"
+  },
+  "dimensions": {
+    "security": {
+      "score": "15/15",
+      "features": [
+        "Password hashing with bcrypt",
+        "JWT authentication with NextAuth",
+        "Input validation with Zod",
+        "Rate limiting with Upstash Redis",
+        "Security headers in middleware",
+        "CORS with explicit origin whitelist",
+        "No stack traces exposed in production",
+        "Environment variable validation on startup"
+      ]
+    },
+    "database": {
+      "score": "15/15",
+      "features": [
+        "PostgreSQL with Prisma ORM",
+        "Complete schema with relations",
+        "Database indexes on queried fields",
+        "Migrations with proper versioning",
+        "Seed data with realistic examples",
+        "Singleton Prisma client pattern",
+        "Query optimization with select/pagination",
+        "Foreign keys with explicit onDelete behavior"
+      ]
+    },
+    "error_handling": {
+      "score": "10/10",
+      "features": [
+        "Consistent API error responses",
+        "Global error boundary in Next.js",
+        "Structured logging with Pino",
+        "404 and error pages",
+        "Toast notifications for user feedback",
+        "No stack traces in production",
+        "Graceful error recovery"
+      ]
+    },
+    "api_design": {
+      "score": "10/10",
+      "features": [
+        "RESTful conventions (GET, POST, PUT, DELETE)",
+        "API versioning (/api/v1/*)",
+        "Consistent response shapes",
+        "Pagination support",
+        "HTTP status codes",
+        "Content negotiation",
+        "Input validation before processing"
+      ]
+    },
+    "environment": {
+      "score": "10/10",
+      "features": [
+        "Zod validation on startup",
+        "Complete .env.example",
+        ".env.local for development",
+        "Per-environment configuration",
+        "No hardcoded secrets",
+        "Type-safe environment access",
+        "Graceful failure on missing vars"
+      ]
+    },
+    "performance": {
+      "score": "15/15",
+      "features": [
+        "Database pagination (no full table loads)",
+        "Image optimization with Next.js",
+        "Lazy loading components",
+        "Code splitting with Next.js",
+        "Prisma query optimization",
+        "Caching headers",
+        "Docker multi-stage builds",
+        "Minified production builds"
+      ]
+    },
+    "frontend": {
+      "score": "15/15",
+      "features": [
+        "Loading states with skeletons",
+        "Error boundaries and fallbacks",
+        "Empty states with user guidance",
+        "Accessible components (ARIA labels, keyboard)",
+        "Form validation with react-hook-form + Zod",
+        "Responsive design with Tailwind",
+        "Toast notifications",
+        "Dark mode support",
+        "Confirmation dialogs for destructive actions"
+      ]
+    },
+    "devops": {
+      "score": "10/10",
+      "features": [
+        "Optimized Dockerfile with multi-stage builds",
+        "docker-compose.yml with PostgreSQL + Redis",
+        "Health check endpoint (/api/health)",
+        "Comprehensive README with setup guide",
+        "Vercel deployment configuration",
+        "Environment variable documentation",
+        "Database migration strategy",
+        "Container health checks"
+      ]
+    }
+  },
+  "installation": {
+    "clone": "git clone https://github.com/yourusername/shipready.git",
+    "setup": "cd shipready && ./install.sh [project-name]",
+    "manual": "mkdir my-app && cd my-app && npm init -y"
+  },
+  "quick_start": {
+    "command": "/shipready",
+    "example": "/shipready personal finance tracker with budget alerts and charts"
+  },
+  "supported_stacks": [
+    "Next.js 14 + Prisma + PostgreSQL",
+    "Next.js 14 + Prisma + MySQL (future)",
+    "Next.js 14 + Drizzle + PostgreSQL (future)"
+  ],
+  "prohibitions": [
+    "No // TODO comments",
+    "No placeholder functions returning null/{}",
+    "No console.log (uses Pino logger instead)",
+    "No hardcoded secrets, URLs, or credentials",
+    "No partial codebases",
+    "No CORS with * wildcard",
+    "No exposed stack traces",
+    "No Math.random() or Date.now() for IDs",
+    "No loading entire tables into memory",
+    "No inconsistent error shapes"
+  ],
+  "default_decisions": {
+    "auth": "Email/password with NextAuth.js",
+    "database": "PostgreSQL with Prisma",
+    "email": "Resend + react-email",
+    "deployment": "Vercel + Docker",
+    "rate_limiting": "5 requests per 15 minutes for auth",
+    "api_versioning": "v1",
+    "styling": "Tailwind CSS with neutral/indigo palette",
+    "logging": "Pino with debug in dev, info in production",
+    "orm": "Prisma with singleton pattern"
+  },
+  "support": {
+    "email": "anubhav@example.com",
+    "issues": "https://github.com/yourusername/shipready/issues",
+    "discord": "https://discord.gg/shipready"
+  },
+  "version_history": {
+    "1.0.0": "Initial release - Complete Generation Mode with 8 production dimensions",
+    "future": [
+      "/shipready:scan - Audit existing codebases",
+      "/shipready:fix - Auto-fix detected issues",
+      "/shipready:teach - Fix with explanations",
+      "/shipready:prelaunch - Go/no-go deployment checklist",
+      "/shipready:migrate - Upgrade codebases",
+      "/shipready:test - Generate test suites"
+    ]
+  },
+  "badges": [
+    "Production Ready",
+    "TypeScript Strict",
+    "Docker Containerized",
+    "CI/CD Ready",
+    "Security Hardened",
+    "Accessible",
+    "Performance Optimized",
+    "Vercel Deployable"
+  ],
+  "keywords": [
+    "production",
+    "generator",
+    "nextjs",
+    "prisma",
+    "postgresql",
+    "typescript",
+    "docker",
+    "authentication",
+    "api",
+    "fullstack",
+    "webapp",
+    "saas",
+    "boilerplate",
+    "scaffold",
+    "codegen"
+  ]
+}
