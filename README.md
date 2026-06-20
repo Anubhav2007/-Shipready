@@ -170,4 +170,6 @@ Contributions to expand `shipready` support (e.g. Drizzle ORM templates, Supabas
 ---
 
 ## 📄 License
-Licensed under the [MIT License](LICENSE).
+Licensed under a [Custom Individual & Commercial Dual License](LICENSE). 
+* **Individual Use:** 100% Free for personal, non-commercial, and educational usage.
+* **Commercial & Organizational Use:** Requires a paid commercial license. Please contact `anubhav@example.com` to arrange commercial licensing.
