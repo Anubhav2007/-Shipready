@@ -38,14 +38,14 @@ Each dimension's full rule set lives in its own reference file. Load the relevan
 
 | Dimension | Reference file |
 |---|---|
-| Security | `security.md` |
-| Database | `database.md` |
-| Error handling | `error-handling.md` |
-| API design | `api-design.md` |
-| Environment | `environment.md` |
-| Performance | `performance.md` |
-| Frontend | `frontend.md` |
-| DevOps | `devops.md` |
+| Security | `dimensions/security.md` |
+| Database | `dimensions/database.md` |
+| Error handling | `dimensions/error-handling.md` |
+| API design | `dimensions/api-design.md` |
+| Environment | `dimensions/environment.md` |
+| Performance | `dimensions/performance.md` |
+| Frontend | `dimensions/frontend.md` |
+| DevOps | `dimensions/devops.md` |
 
 You make **smart, opinionated decisions** when information is missing. You never ask the user a question mid-generation. You document every assumption transparently in `SHIPREADY.md`. You end every generation with a **Ship Score (X/100)**.
 
@@ -68,11 +68,11 @@ Silently affirm before generating:
 
 ## Routing logic — how /shipready is invoked
 
-### Case 1 — `/shipready [description]` (Generate Mode)
+### Case 1 — `/shipready [description]` (Generate Mode — Pass 1)
 
-**Trigger:** User types `/shipready` followed by any non-empty description.
+**Trigger:** User types `/shipready` followed by any non-empty description, AND no `SHIPREADY.md` exists in the project root.
 
-**Action:** Execute full Generate Mode. Load all 6 phases in sequence. No pauses. No clarifying questions. Generate the complete codebase.
+**Action:** Execute Generate Mode — Pass 1. Follow the 6 phases to generate the codebase, even if requirements (packages, databases, API keys) are missing, using smart defaults and graceful fallbacks. Write a `SHIPREADY.md` documenting missing requirements and fallbacks, and output a Pass 1 Ship Score.
 
 **Example triggers:**
 ```
@@ -82,6 +82,15 @@ Silently affirm before generating:
 /shipready multi-tenant project management tool like Trello
 /shipready e-commerce store with Stripe checkout and order tracking
 ```
+
+---
+
+### Case 1.1 — "packages installed, regenerate" (Generate Mode — Pass 2)
+
+**Trigger:** User says any of: "regenerate", "packages installed", "dependencies ready", "done installing", "setup done", "ready", "redo", "/shipready regenerate", or any similar confirmation, AND a `SHIPREADY.md` already exists in the project root.
+
+**Action:** Execute Generate Mode — Pass 2. Read `SHIPREADY.md` first, compare the Pass 1 smart defaults against full production requirements. Replace every fallback with full production-grade implementations for all 8 dimensions following the reference protocols (Security, Error Handling, Database, API Design, Environment, Performance, Frontend, DevOps) with no in-memory fallbacks remaining, producing the final Ship Score.
+
 
 ---
 
@@ -185,9 +194,19 @@ For now: /shipready your app description
 
 ---
 
-## Generate Mode — the 6 phases
+## Generate Mode — the 6 phases (Pass 1 and Pass 2)
 
-When `/shipready [description]` is triggered, execute all 6 phases **in order**, **without pausing**, **without asking questions**.
+When `/shipready [description]` (Pass 1) is triggered:
+- Execute all 6 phases **in order**, **without pausing**, **without asking questions**.
+- If requirements (packages, configs, databases, etc.) are missing, generate the app/website anyway using smart defaults and graceful fallbacks.
+- Document any missing requirements and applied fallbacks in `SHIPREADY.md` under a dedicated "Missing Requirements and Smart Defaults" section.
+- Output the Pass 1 Ship Score.
+
+When a regeneration confirmation (Pass 2) is triggered:
+- Read `SHIPREADY.md` first to extract application configuration and missing requirements.
+- Identify all files that need to be upgraded from their smart defaults/fallbacks.
+- Update those files to full production-grade implementations for all 8 dimensions following the reference protocols (Security, Error Handling, Database, API Design, Environment, Performance, Frontend, DevOps) with no fallbacks remaining.
+- Verify the final codebase and overwrite `SHIPREADY.md` with the Pass 2 final report and Ship Score.
 
 ---
 
@@ -242,7 +261,7 @@ Design the full database schema before writing any code. Load `database.md` Rule
 
 **1.5 API surface design**
 
-Map every entity to its full CRUD surface before writing routes. Load `api-design.md` for routing conventions. Document the API surface in `SHIPREADY.md`.
+Map every entity to its full CRUD surface before writing routes. Load `dimensions/api-design.md` for routing conventions. Document the API surface in `SHIPREADY.md`.
 
 ---
 
@@ -313,53 +332,53 @@ Adapt the tree to the detected app category. Always include every file listed ab
 
 ### Phase 3 — Core infrastructure (generate in this order)
 
-Generate files in this exact order so later files can reference earlier ones. Load `environment.md` and `security.md` before this phase.
+Generate files in this exact order so later files can reference earlier ones. Load `dimensions/environment.md` and `dimensions/security.md` before this phase.
 
 **3.1** `package.json` — All dependencies pinned. No `^`. No `*`. Exact versions only.
 
 **3.2** `tsconfig.json` — Strict mode, path aliases (`@/*` → `src/*`).
 
-**3.3** `.env.example` — See `environment.md` Rule 2 for the full template and format requirements.
+**3.3** `.env.example` — See `dimensions/environment.md` Rule 2 for the full template and format requirements.
 
 **3.4** `.gitignore` — Includes `.env.local`, `.env.production`, `node_modules/`, `.next/`.
 
-**3.5** `prisma/schema.prisma` — Full schema. See `database.md` Rules 1–3 for entity completeness, indexing, and `onDelete` requirements.
+**3.5** `prisma/schema.prisma` — Full schema. See `dimensions/database.md` Rules 1–3 for entity completeness, indexing, and `onDelete` requirements.
 
-**3.6** `prisma/seed.ts` — See `database.md` Rule 5 for the seed template.
+**3.6** `prisma/seed.ts` — See `dimensions/database.md` Rule 5 for the seed template.
 
-**3.7** `src/lib/prisma.ts` — Singleton pattern. See `database.md` Rule 6.
+**3.7** `src/lib/prisma.ts` — Singleton pattern. See `dimensions/database.md` Rule 6.
 
-**3.8** `src/lib/logger.ts` — Pino instance. See `error-handling.md` Rule 3.
+**3.8** `src/lib/logger.ts` — Pino instance. See `dimensions/error-handling.md` Rule 3.
 
-**3.9** `src/lib/env.ts` — Zod startup validation. See `environment.md` Rule 1.
+**3.9** `src/lib/env.ts` — Zod startup validation. See `dimensions/environment.md` Rule 1.
 
-**3.10** `src/lib/rate-limit.ts` — Upstash Redis rate limiter. See `security.md` Rule 4.
+**3.10** `src/lib/rate-limit.ts` — Upstash Redis rate limiter. See `dimensions/security.md` Rule 4.
 
-**3.11** `src/middleware.ts` — Auth + CORS + security headers. See `security.md` Rule 2.
+**3.11** `src/middleware.ts` — Auth + CORS + security headers. See `dimensions/security.md` Rule 2.
 
-**3.12** `src/lib/auth.ts` — NextAuth v5 config. See `security.md` Rule 1.
+**3.12** `src/lib/auth.ts` — NextAuth v5 config. See `dimensions/security.md` Rule 1.
 
 ---
 
 ### Phase 4 — Feature implementation
 
-Generate every feature implied by the description. For each feature, load `api-design.md`, `performance.md`, and `frontend.md`.
+Generate every feature implied by the description. For each feature, load `dimensions/api-design.md`, `dimensions/performance.md`, and `dimensions/frontend.md`.
 
-**4.1 Database layer** — Repository functions in `src/lib/[feature].ts`. Never put raw Prisma calls in route handlers. Apply `performance.md` Rules 1–2 (pagination, query efficiency).
+**4.1 Database layer** — Repository functions in `src/lib/[feature].ts`. Never put raw Prisma calls in route handlers. Apply `dimensions/performance.md` Rules 1–2 (pagination, query efficiency).
 
 **4.2 Validation schemas** — One Zod schema file per resource: `src/lib/validations/[resource].ts`. Export `create[Resource]Schema`, `update[Resource]Schema`, `[resource]IdSchema`.
 
-**4.3 API routes** — All routes under `src/app/api/v1/[resource]/`. Follow `api-design.md` for method semantics and response shapes. Follow `error-handling.md` for error response shapes. Every route: auth check → rate limit check → input validation → business logic → consistent response.
+**4.3 API routes** — All routes under `src/app/api/v1/[resource]/`. Follow `dimensions/api-design.md` for method semantics and response shapes. Follow `dimensions/error-handling.md` for error response shapes. Every route: auth check → rate limit check → input validation → business logic → consistent response.
 
-**4.4 UI pages** — List page with pagination, empty state, error state, loading skeleton. Detail page with not-found handling. Create/edit form with react-hook-form + Zod. Delete with confirmation modal. Follow `frontend.md` for all state and accessibility requirements.
+**4.4 UI pages** — List page with pagination, empty state, error state, loading skeleton. Detail page with not-found handling. Create/edit form with react-hook-form + Zod. Delete with confirmation modal. Follow `dimensions/frontend.md` for all state and accessibility requirements.
 
-**4.5 Components** — Generic UI components in `src/components/ui/`. Feature components in `src/components/[feature]/`. All components accessible per `frontend.md` Rule 3.
+**4.5 Components** — Generic UI components in `src/components/ui/`. Feature components in `src/components/[feature]/`. All components accessible per `dimensions/frontend.md` Rule 3.
 
 ---
 
 ### Phase 5 — DevOps files
 
-Load `devops.md` for the full Dockerfile, docker-compose.yml, health check, README, and CI workflow templates. Generate, in order:
+Load `dimensions/devops.md` for the full Dockerfile, docker-compose.yml, health check, README, and CI workflow templates. Generate, in order:
 
 **5.1** `Dockerfile` — multi-stage, non-root.
 **5.2** `docker-compose.yml` — services + healthchecks.
@@ -409,6 +428,12 @@ Stack: Next.js 14 + Prisma + PostgreSQL + TypeScript
 
 ## Environment variables required
 [table of all vars with descriptions]
+
+## Missing requirements and smart defaults applied in Pass 1
+[Explicitly list all missing requirements, packages, API keys, databases, or environment variables. Detail the smart defaults/fallbacks applied in Pass 1, with reasoning]
+
+## What Pass 2 will upgrade
+- [List every fallback that Pass 2 will replace with production implementations for all 8 features]
 
 ## Seed data
 [what was seeded and default credentials]
