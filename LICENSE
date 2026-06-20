@@ -1,21 +1,21 @@
-MIT License
+Custom Dual License Agreement
 
-Copyright (c) 2026 Anubhav
+Copyright (c) 2026 Anubhav. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. INDIVIDUAL & PERSONAL USE LICENSE
+Permission is hereby granted, free of charge, to any individual person to use, copy, modify, run, and distribute this software for personal, non-commercial, educational, research, or private testing purposes, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+- The original copyright notice and this permission notice must be included in all copies or substantial portions of the Software.
+- The software is provided "as is", without warranty of any kind.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. COMMERCIAL & ORGANIZATIONAL USE LICENSE
+Any usage of this software by a company, business, corporation, government entity, educational institution, or individual for commercial purposes is strictly prohibited without a valid, paid commercial license. 
+
+Commercial purposes include, but are not limited to:
+- Generating direct or indirect revenue or business value.
+- Usage in internal business operations, development pipelines, or team workflows.
+- Integration as a service or feature within a commercial platform or SaaS.
+- Generating, auditing, or hardening codebases for paying clients or commercial projects.
+
+To obtain a commercial license, negotiate terms, or discuss team licensing, please contact:
+Email: anubhav@example.com
